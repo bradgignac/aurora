@@ -25,7 +25,7 @@ module.exports = function (grunt) {
           node: true
         }
       },
-      javascript: {
+      javascripts: {
         src: ['app/javascripts/**/*.js'],
         options: {
           browser: true,
@@ -37,8 +37,15 @@ module.exports = function (grunt) {
         }
       }
     },
+    concat: {
+      javascripts: {
+        files: {
+          'tmp/aurora-application.js': ['app/javascripts/**/*.js']
+        }
+      }
+    },
     emberTemplates: {
-      compile: {
+      templates: {
         options: {
           templateBasePath: 'app',
           templateCompilerPath: 'bower_components/ember/ember-template-compiler.js',
@@ -51,15 +58,17 @@ module.exports = function (grunt) {
           handlebarsPath: 'bower_components/handlebars/handlebars.js'
         },
         files: {
-          'tmp/aurora-templates.js': ['app/templates/*.hbs']
+          'tmp/aurora-templates.js': ['app/templates/**/*.hbs']
         }
       }
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-ember-templates');
 
+  grunt.registerTask('build:javascripts', 'Compile Javascripts.', ['concat:javascripts']);
   grunt.registerTask('build:templates', 'Compile Handlebars templates.', ['emberTemplates:compile']);
 
   grunt.registerTask('lint', 'Lint all Javascript files.', ['jshint']);
