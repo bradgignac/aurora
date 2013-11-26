@@ -1,4 +1,6 @@
 define('aurora/router', [], function () {
+  'use strict';
+
   var Router;
 
   Router = Ember.Router.extend();

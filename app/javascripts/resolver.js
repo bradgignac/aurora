@@ -1,5 +1,7 @@
 define('resolver', [], function () {
-  function resolveRouter(parsedName) {
+  'use strict';
+
+  function resolveRouter() {
     return require('aurora/router');
   }
 
