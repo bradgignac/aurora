@@ -5,7 +5,12 @@ define('aurora/resolver', [], function () {
     return require('aurora/router');
   }
 
+  function resolveTemplate(parsedName) {
+    return require('aurora/templates/' + parsedName.name);
+  }
+
   return Ember.DefaultResolver.extend({
-    resolveRouter: resolveRouter
+    resolveRouter: resolveRouter,
+    resolveTemplate: resolveTemplate
   });
 });
