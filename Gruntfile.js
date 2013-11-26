@@ -44,6 +44,13 @@ module.exports = function (grunt) {
         }
       }
     },
+    copy: {
+      html: {
+        files: {
+          'tmp/index.html': ['app/index.html']
+        }
+      }
+    },
     emberTemplates: {
       templates: {
         options: {
@@ -65,9 +72,11 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-ember-templates');
 
+  grunt.registerTask('build:html', 'Compile HTML.', ['copy:html']);
   grunt.registerTask('build:javascripts', 'Compile Javascripts.', ['concat:javascripts']);
   grunt.registerTask('build:templates', 'Compile Handlebars templates.', ['emberTemplates:compile']);
 
