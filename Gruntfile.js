@@ -73,8 +73,28 @@ module.exports = function (grunt) {
       server: {
         options: {
           base: ['bower_components', 'tmp'],
-          keepalive: true
+          livereload: true
         }
+      }
+    },
+    watch: {
+      options: {
+        livereload: true
+      },
+      html: {
+        files: ['app/index.html'],
+        tasks: ['build:html']
+      },
+      javascripts: {
+        files: ['app/javascripts/**/*.js'],
+        tasks: ['build:javascripts']
+      },
+      templates: {
+        files: ['app/templates/**/*.hbs'],
+        tasks: ['build:templates']
+      },
+      vendor: {
+        files: ['bower_components/**/*.js']
       }
     }
   });
@@ -83,6 +103,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-ember-templates');
 
   grunt.registerTask('build', 'Compile all source files.', ['build:html', 'build:javascripts', 'build:templates']);
@@ -92,5 +113,5 @@ module.exports = function (grunt) {
 
   grunt.registerTask('lint', 'Lint all Javascript files.', ['jshint']);
 
-  grunt.registerTask('server', 'Start an Aurora development server.', ['build', 'connect:server']);
+  grunt.registerTask('server', 'Start an Aurora development server.', ['build', 'connect:server', 'watch']);
 };
