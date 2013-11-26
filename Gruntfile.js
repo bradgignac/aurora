@@ -98,6 +98,7 @@ module.exports = function (grunt) {
           'bower_components/ember/ember.js',
           'bower_components/ember-data/ember-data.js',
           'bower_components/almond/almond.js',
+          'test/test_helper.js',
           'app/javascripts/**/*.js',
           'tmp/aurora-templates.js',
           'test/**/*.js'
