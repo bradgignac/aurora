@@ -37,6 +37,9 @@ module.exports = function (grunt) {
         }
       }
     },
+    clean: {
+      tmp: ['tmp']
+    },
     concat: {
       javascripts: {
         files: {
@@ -99,6 +102,7 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -113,5 +117,5 @@ module.exports = function (grunt) {
 
   grunt.registerTask('lint', 'Lint all Javascript files.', ['jshint']);
 
-  grunt.registerTask('server', 'Start an Aurora development server.', ['build', 'connect:server', 'watch']);
+  grunt.registerTask('server', 'Start an Aurora development server.', ['clean', 'build', 'connect:server', 'watch']);
 };
