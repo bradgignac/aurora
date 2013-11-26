@@ -26,13 +26,21 @@ module.exports = function (grunt) {
         }
       },
       javascripts: {
-        src: ['app/javascripts/**/*.js'],
+        src: ['app/javascripts/**/*.js', 'test/**/*.js'],
         options: {
           browser: true,
           globals: {
+            // Ember
             Ember: true,
+
+            // RequireJS
             define: true,
-            require: true
+            require: true,
+
+            // Jasmine
+            describe: true,
+            expect: true,
+            it: true
           }
         }
       }
@@ -80,24 +88,64 @@ module.exports = function (grunt) {
         }
       }
     },
-    watch: {
+    karma: {
       options: {
-        livereload: true
+        frameworks: ['jasmine'],
+        browsers: ['PhantomJS'],
+        files: [
+          'bower_components/jquery/jquery.js',
+          'bower_components/handlebars/handlebars.runtime.js',
+          'bower_components/ember/ember.js',
+          'bower_components/ember-data/ember-data.js',
+          'bower_components/almond/almond.js',
+          'app/javascripts/**/*.js',
+          'tmp/aurora-templates.js',
+          'test/**/*.js'
+        ]
       },
+      unit: {
+        singleRun: true
+      }
+    },
+    watch: {
       html: {
+        options: {
+          livereload: true
+        },
         files: ['app/index.html'],
         tasks: ['build:html']
       },
       javascripts: {
+        options: {
+          livereload: true
+        },
         files: ['app/javascripts/**/*.js'],
         tasks: ['build:javascripts']
       },
       templates: {
+        options: {
+          livereload: true
+        },
         files: ['app/templates/**/*.hbs'],
         tasks: ['build:templates']
       },
       vendor: {
+        options: {
+          livereload: true
+        },
         files: ['bower_components/**/*.js']
+      },
+      tests: {
+        options: {
+          livereload: false
+        },
+        files: [
+          'bower_components/**/*.js',
+          'app/javascripts/**/*.js',
+          'app/templates/**/*.hbs',
+          'test/**/*.js'
+        ],
+        tasks: ['build:templates', 'karma:unit']
       }
     }
   });
@@ -109,6 +157,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-ember-templates');
+  grunt.loadNpmTasks('grunt-karma');
+
+  grunt.registerTask('default', ['lint', 'test']);
 
   grunt.registerTask('build', 'Compile all source files.', ['build:html', 'build:javascripts', 'build:templates']);
   grunt.registerTask('build:html', 'Compile HTML.', ['copy:html']);
@@ -118,4 +169,7 @@ module.exports = function (grunt) {
   grunt.registerTask('lint', 'Lint all Javascript files.', ['jshint']);
 
   grunt.registerTask('server', 'Start an Aurora development server.', ['clean', 'build', 'connect:server', 'watch']);
+
+  grunt.registerTask('test', 'Run all tests.', ['build:templates', 'karma:unit']);
+  grunt.registerTask('test:watch', 'Automatically run all tests when changes are made.', ['build:templates', 'karma:unit', 'watch:tests']);
 };
