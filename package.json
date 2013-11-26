@@ -1,0 +1,21 @@
+{
+  "name": "aurora",
+  "version": "0.0.0",
+  "description": "An OpenStack control panel focused on great user experience.",
+  "keywords": [
+    "openstack"
+  ],
+  "author": "Brad Gignac <bgignac@bradgignac.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bradgignac/aurora"
+  },
+  "scripts": {
+    "postInstall": "bower install"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.7.2"
+  }
+}
