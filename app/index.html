@@ -15,13 +15,21 @@
 
   <!-- TODO: Show initial loading state. -->
 
-  <script src="/bower_components/jquery/jquery.min.js"></script>
-  <script src="/bower_components/handlebars/handlebars.runtime.min.js"></script>
-  <script src="/bower_components/ember/ember.min.js"></script>
-  <script src="/bower_components/ember-data/ember-data.min.js"></script>
-  <script src="/bower_components/almond/almond.js"></script>
+  <script src="/jquery/jquery.js"></script>
+  <script src="/handlebars/handlebars.runtime.js"></script>
+  <script src="/ember/ember.js"></script>
+  <script src="/ember-data/ember-data.js"></script>
+  <script src="/almond/almond.js"></script>
 
   <script src="/aurora-templates.js"></script>
-  <script src="/aurora.js"></script>
+  <script src="/aurora-application.js"></script>
+
+  <script type="application/javascript">
+
+  require(['aurora/application'], function (Application) {
+    window.Aurora = Application.create();
+  });
+
+  </script>
 </body>
 </html>

@@ -68,17 +68,29 @@ module.exports = function (grunt) {
           'tmp/aurora-templates.js': ['app/templates/**/*.hbs']
         }
       }
+    },
+    connect: {
+      server: {
+        options: {
+          base: ['bower_components', 'tmp'],
+          keepalive: true
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-ember-templates');
 
+  grunt.registerTask('build', 'Compile all source files.', ['build:html', 'build:javascripts', 'build:templates']);
   grunt.registerTask('build:html', 'Compile HTML.', ['copy:html']);
   grunt.registerTask('build:javascripts', 'Compile Javascripts.', ['concat:javascripts']);
-  grunt.registerTask('build:templates', 'Compile Handlebars templates.', ['emberTemplates:compile']);
+  grunt.registerTask('build:templates', 'Compile Handlebars templates.', ['emberTemplates:templates']);
 
   grunt.registerTask('lint', 'Lint all Javascript files.', ['jshint']);
+
+  grunt.registerTask('server', 'Start an Aurora development server.', ['build', 'connect:server']);
 };

@@ -1,4 +1,4 @@
-define('resolver', [], function () {
+define('aurora/resolver', [], function () {
   'use strict';
 
   function resolveRouter() {
