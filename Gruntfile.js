@@ -29,6 +29,7 @@ module.exports = function (grunt) {
         src: ['app/javascripts/**/*.js', 'test/**/*.js'],
         options: {
           browser: true,
+          jquery: true,
           globals: {
             // Ember
             Ember: true,
@@ -38,9 +39,12 @@ module.exports = function (grunt) {
             require: true,
 
             // Jasmine
+            jasmine: true,
+            beforeEach: true,
             describe: true,
             expect: true,
-            it: true
+            it: true,
+            spyOn: true
           }
         }
       }
