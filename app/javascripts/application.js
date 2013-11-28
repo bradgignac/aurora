@@ -1,5 +1,7 @@
-define('aurora/application', ['aurora/resolver'], function (Resolver) {
+define('aurora/application', ['aurora/initializers/session', 'aurora/resolver'], function (SessionInitializer, Resolver) {
   'use strict';
+
+  Ember.Application.initializer(SessionInitializer);
 
   return Ember.Application.extend({
     LOG_ACTIVE_GENERATION: true,
