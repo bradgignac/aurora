@@ -16,6 +16,14 @@ describe('Resolver', function () {
     expect(resolver.resolveRouter()).toBe(Router);
   });
 
+  it('resolves route', function () {
+    var Route;
+
+    Route = require('aurora/routes/index');
+
+    expect(resolver.resolveRoute({ name: 'index' })).toBe(Route);
+  });
+
   it('resolves template', function () {
     var module, template;
 
