@@ -1,6 +1,14 @@
 define('aurora/resolver', [], function () {
   'use strict';
 
+  function resolveController(parsedName) {
+    try {
+      return require('aurora/controllers/' + parsedName.name);
+    } catch (e) {
+      return null;
+    }
+  }
+
   function resolveRouter() {
     return require('aurora/router');
   }
@@ -18,6 +26,7 @@ define('aurora/resolver', [], function () {
   }
 
   return Ember.DefaultResolver.extend({
+    resolveController: resolveController,
     resolveRouter: resolveRouter,
     resolveRoute: resolveRoute,
     resolveTemplate: resolveTemplate

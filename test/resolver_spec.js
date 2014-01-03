@@ -8,6 +8,14 @@ describe('Resolver', function () {
     resolver = Resolver.create();
   });
 
+  it('resolves controller', function () {
+    var Controller;
+
+    Controller = require('aurora/controllers/login');
+
+    expect(resolver.resolveController({ name: 'login' })).toBe(Controller);
+  });
+
   it('resolves router', function () {
     var Router;
 

@@ -11,7 +11,7 @@ define('aurora/session/session', [], function () {
     },
     authenticate: function (username, password) {
       if (this.authenticated) {
-        return;
+        return Ember.RSVP.resolve();
       }
 
       return jQuery.ajax({
