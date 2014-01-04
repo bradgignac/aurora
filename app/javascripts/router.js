@@ -5,7 +5,9 @@ define('aurora/router', [], function () {
 
   Router = Ember.Router.extend();
   Router.map(function () {
+    this.route('login');
 
+    this.route('dashboard');
   });
 
   return Router;
